@@ -1,12 +1,15 @@
 class CreateTimecards < ActiveRecord::Migration[6.0]
   def change
     create_table :timecards do |t|
-      t.integer :year
-      t.integer :month
-      t.integer :day
+      # 出勤時間
       t.datetime :in_at
+      # 退勤時間
       t.datetime :out_at
-      t.integer :user_id
+      # 休憩時間
+      t.integer :breaktime
+      # 勤務時間
+      t.float :working_hours
+      t.references :user, foreign_key: true
 
       t.timestamps
     end
