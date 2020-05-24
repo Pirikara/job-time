@@ -60,8 +60,8 @@ export default {
               name: this.name,
               uid: res.user.uid
             };
-            axios.post("/v1/users", { user }).then(() => {
-              this.$router.push("/")
+            axios.post("/v1/users", { user }).then(async () => {
+              await this.$router.push("/")
             });
         })
         .catch(error => {

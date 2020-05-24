@@ -116,7 +116,7 @@ export default {
           {
             icon: 'mdi-apps',
             title: '勤務表',
-            to: '/show'
+            to: '/schedule'
           },
           {
             icon: 'mdi-chart-bubble',
