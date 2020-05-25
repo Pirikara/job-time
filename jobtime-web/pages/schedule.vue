@@ -1,13 +1,26 @@
 <template>
   <v-container>
   <v-row>
-    <v-col cols="10">
-      <v-data-table
-        :headers="headers"
-        :items="timecards"
-      >
-      </v-data-table>
-
+    <v-col>
+      <h2>{{ yearmonth }}</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>日付</th>
+            <th>出勤</th>
+            <th>退勤</th>
+            <th>休憩（分）</th>
+            <th>勤務時間（時間）</th>
+          </tr>
+          <tr v-for="timecard in timecards" :key="timecard.id">
+            <td>{{ timecard.created_at | toMonth }} 月 {{ timecard.created_at | toDate }} 日</td>
+            <td>{{ timecard.in_at | toHour }}：{{ timecard.in_at | toMinute }}</td>
+            <td>{{ timecard.out_at | toHour }}：{{ timecard.in_at | toMinute }}</td>
+            <td>{{ timecard.breaktime }}</td>
+            <td>{{ Math.floor(timecard.working_hours / 3600 ) }}</td>
+          </tr>
+        </tbody>
+      </table>
     </v-col>
     </v-row>
 </v-container>
@@ -20,39 +33,12 @@ import axios from '@/plugins/axios'
 export default{
   data(){
     return{
+      yearmonth: this.$dayjs().locale('ja').format('YYYY MMM'),
       // axiosで取得するデータの入れ物
-      timecards: [],
-      headers: [
-        {
-          text: '日付',
-          value: this.$dayjs().locale('ja').format('MM月DD日 dddd'),
-          soatable: false
-        },
-        {
-          text: '出勤',
-          value: 'in_at',
-          soatable: false
-        },
-        {
-          text: '退勤',
-          value: 'out_at',
-          soatable: false
-        },
-        {
-          text: '休憩',
-          value: 'breaktime',
-          soatable: false
-        },
-        {
-          text: '勤務時間',
-          value: 'working_hours',
-          soatable: false
-        }
-      ]
+      timecards: []
     }
   },
   methods: {
-
   },
   // mountedでVueインスタンスのDOM作成完了直後に読み込み
   mounted(){
@@ -64,9 +50,42 @@ export default{
     })
     // dataで用意したデータの入れ物timecards[]に取得したデータを突っ込む
     .then(response => (this.timecards = response.data))
+  },
+  filters: {
+    toMonth(val){
+      var date = new Date(val);
+      return date.getMonth();
+    },
+    toDate(val){
+      var date = new Date(val)
+      return date.getDate();
+    },
+    toHour(val){
+      var date = new Date(val);
+      return date.getHours();
+    },
+    toMinute(val){
+      var date = new Date(val);
+      return date.getMinutes();
+    }
   }
 }
 </script>
 
-<style>
+<style scoped>
+th{
+  width: 20%;
+}
+td{
+  width: 20%;
+  text-align: center;
+}
+table{
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: solid 1px #ffffff;
+}
 </style>
