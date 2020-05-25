@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     if Rails.env.production?
-      origins 'firebase-appのURL'
+      origins 'https://jobtime-7ab06.web.app'
     else
       origins 'http://localhost:3000'
     end
