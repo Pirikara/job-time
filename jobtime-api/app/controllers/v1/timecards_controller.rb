@@ -17,7 +17,8 @@ class V1::TimecardsController < ApplicationController
 
     if Timecard.jobin_pushed?(@user.id)
       @timecard = Timecard.where(user_id: @user.id).where(in_at: Time.now.midnight..(Time.now.midnight + 1.day))
-      @working_hours = Time.now - @timecard.in_at
+      @working_hours = Time.now - @timecard[0].in_at
+      binding.pry
       if @working_hours >= 28800
         @breaktime = 60
       elsif @working_hours >= 25200
