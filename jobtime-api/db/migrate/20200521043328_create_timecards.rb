@@ -9,7 +9,7 @@ class CreateTimecards < ActiveRecord::Migration[6.0]
       t.integer :breaktime
       # 勤務時間
       t.float :working_hours
-      t.references :user, foreign_key: true
+      t.integer :user_id, foreign_key: true
 
       t.timestamps
     end
