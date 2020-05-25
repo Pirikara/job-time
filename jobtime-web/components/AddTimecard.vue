@@ -2,14 +2,14 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md=4>
+        <div class="now_time">
           <h1>{{ now }}</h1>
-        </v-col>
+        </div>
         <v-col cols="12" md="4">
           <v-btn @click="handleJobin" :disabled="jobin_pushed">出勤</v-btn>
           <v-btn @click="handleJobout" :disabled="jobout_pushed">退勤</v-btn>
-          <p>{{ error }}</p>
         </v-col>
+        <p>{{ error }}</p>
       </v-row>
     </v-container>
   </v-form>
@@ -48,11 +48,25 @@ export default {
       this.jobout_pushed = true
       this.error = "退勤済みです"
     }
-  },
-  wathch: {
   }
 }
 </script>
 
 <style scoped>
+.now_time{
+  width: 100vw;
+  font-size: 20px;
+  margin: 20px 20px;
+}
+.col-md-4{
+  display: flex;
+  justify-content: center;
+}
+.v-btn{
+  height: 80px !important;
+  width: 150px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 40px;
+}
 </style>

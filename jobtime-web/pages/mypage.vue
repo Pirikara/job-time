@@ -1,10 +1,14 @@
 <template>
   <div>
     <div v-if="user">
-      <p>Email: {{user.email}}</p>
-      <p>ユーザー名: {{user.name}}</p>
+      <div class="user_information">
+        <p>EMAIL...  {{user.email}}</p>
+        <p>USER...  {{user.name}}</p>
+      </div>
     </div>
-    <v-btn @click="logOut">ログアウト</v-btn>
+    <div class="logout_button">
+      <v-btn @click="logOut">LOG OUT</v-btn>
+    </div>
   </div>
 </template>
 
@@ -33,5 +37,24 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+p{
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.logout_button{
+  width: 100%;
+  text-align: center;
+}
+.v-btn{
+  margin-top: 15px;
+  height: 80px !important;
+  width: 150px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.user_information{
+  text-align: center;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div v-if="user">
-    <p>{{ user.name }}</p>
+    <p class="user_name">Welcome {{ user.name }}</p>
     <AddTimecard @submit="addTimecard" />
   </div>
 </template>
@@ -44,5 +44,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.user_name{
+  font-size: 20px;
+  margin-top: 30px;
+}
 </style>
