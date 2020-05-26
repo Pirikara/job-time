@@ -15,9 +15,11 @@
           <tr v-for="timecard in timecards" :key="timecard.id">
             <td>{{ timecard.created_at | toMonth }} 月 {{ timecard.created_at | toDate }} 日</td>
             <td>{{ timecard.in_at | toHour }}：{{ timecard.in_at | toMinute }}</td>
-            <td>{{ timecard.out_at | toHour }}：{{ timecard.in_at | toMinute }}</td>
+            <td v-if="timecard.out_at">{{ timecard.out_at | toHour }}：{{ timecard.in_at | toMinute }}</td>
+            <td v-else></td>
             <td>{{ timecard.breaktime }}</td>
-            <td>{{ Math.floor(timecard.working_hours / 3600 ) }}</td>
+            <td v-if="timecard.working_hours">{{ (timecard.working_hours / 3600) | toFixed }}</td>
+            <td v-else></td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +56,7 @@ export default{
   filters: {
     toMonth(val){
       var date = new Date(val);
-      return date.getMonth();
+      return date.getMonth() + 1;
     },
     toDate(val){
       var date = new Date(val)
@@ -67,6 +69,9 @@ export default{
     toMinute(val){
       var date = new Date(val);
       return date.getMinutes();
+    },
+    toFixed(val){
+      return val.toFixed(1);
     }
   }
 }
@@ -82,6 +87,7 @@ td{
 }
 table{
   margin-top: 20px;
+  width: 100%;
   border-collapse: collapse;
 }
 

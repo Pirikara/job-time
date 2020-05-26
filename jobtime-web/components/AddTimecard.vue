@@ -9,8 +9,8 @@
           <v-btn @click="handleJobin" :disabled="jobin_pushed">出勤</v-btn>
           <v-btn @click="handleJobout" :disabled="jobout_pushed">退勤</v-btn>
         </v-col>
-        <p>{{ error }}</p>
       </v-row>
+      <p>{{ error }}</p>
     </v-container>
   </v-form>
 </template>
